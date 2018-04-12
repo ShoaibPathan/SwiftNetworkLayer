@@ -6,7 +6,7 @@
 
 import Foundation
 
-struct Event: APIModel {
+struct Event: Decodable {
   
   let id: String
   let dateISO: String

@@ -6,7 +6,7 @@
 
 import Foundation
 
-struct Venue: APIModel {
+struct Venue: Decodable {
   
   let city: String
   let name: String

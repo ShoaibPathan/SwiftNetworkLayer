@@ -6,7 +6,7 @@
 
 import Foundation
 
-struct Artist: APIModel {
+struct Artist: Decodable {
   
   let id: String
   let imageUrl: String

@@ -1,16 +1,12 @@
 //
-//  APIEndpoint.swift
+//  Endpoint.swift
 //  SwiftNetworkLayer
 //
 //  Created by Dave Neff
 
 import Foundation
 
-//****************
-// MARK: - API Endpoint
-//****************
-
-protocol APIEndpoint {
+protocol Endpoint {
   
   var baseUrl: String { get }
   var httpMethod: HTTPMethod { get }
@@ -22,10 +18,18 @@ protocol APIEndpoint {
 
 // MARK: - Default properties
 
-extension APIEndpoint {
-
+extension Endpoint {
+  
   var queryItems: [URLQueryItem]? {
     return nil 
+  }
+  
+  var url: URL? {
+    guard var urlComponents = URLComponents(string: baseUrl) else { return nil }
+    urlComponents.path = path
+    urlComponents.queryItems = queryItems
+    
+    return urlComponents.url
   }
   
   var urlRequest: URLRequest? {
@@ -36,17 +40,13 @@ extension APIEndpoint {
 
 // MARK: - Helper
 
-private extension APIEndpoint {
+private extension Endpoint {
   
   /** Helper factory to create `URLRequest` */
   
   func makeUrlRequest() -> URLRequest? {
-    guard var urlComponents = URLComponents(string: baseUrl) else { return nil }
-    urlComponents.path = path
-    urlComponents.queryItems = queryItems
+    guard let url = url else { return nil }
     
-    guard let url = urlComponents.url else { return nil }
-
     var request = URLRequest(url: url)
     request.httpMethod = httpMethod.asString
     

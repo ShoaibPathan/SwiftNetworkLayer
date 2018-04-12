@@ -10,7 +10,10 @@ import UIKit
 
 /** Provides methods to present and dismiss a `LoadingView` */
 
-protocol Loadable { }
+protocol Loadable {
+  func presentLoadingView(inView view: UIView, delay: TimeInterval)
+  func dismissLoadingView(fromView view: UIView)
+}
 
 extension Loadable {
   

@@ -46,7 +46,7 @@ extension ArtistEventsViewController: Loadable {
     
     presentLoadingView(inView: self.view)
     
-    API.shared.requestCollection(ArtistEndpoint.getEvents(name: artist.name)) { (result: Result<[Event]>) in
+    NetworkService.shared.request(ArtistEndpoint.getEvents(name: artist.name)) { (result: Result<[Event]>) in
       self.dismissLoadingView(fromView: self.view)
       
       switch result {

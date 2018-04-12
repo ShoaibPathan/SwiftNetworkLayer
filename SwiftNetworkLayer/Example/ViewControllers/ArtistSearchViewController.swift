@@ -17,6 +17,8 @@ final class ArtistSearchViewController: UIViewController {
   @IBOutlet weak var searchTextField: UITextField!
   @IBOutlet weak var upcomingEventsButton: UIButton!
   
+  let network = NetworkService.shared
+  
   // Properties
   private var artist: Artist?
   
@@ -67,7 +69,7 @@ extension ArtistSearchViewController: Loadable {
   private func fetchArtist(name: String) {
     presentLoadingView(inView: artistInfoStackView, delay: 0.50)
     
-    API.shared.request(ArtistEndpoint.get(name: name)) { (result: Result<Artist>) in
+    NetworkService.shared.request(ArtistEndpoint.get(name: name)) { (result: Result<Artist>) in
       self.dismissLoadingView(fromView: self.artistInfoStackView)
       
       switch result {

@@ -13,7 +13,7 @@ extension UIImageView: Loadable {
   func setImage(fromUrl url: String) {
     presentLoadingView(inView: self)
     
-    API.shared.fetchImage(url) { result in
+    ImageLoader.shared.request(url) { result in
       self.dismissLoadingView(fromView: self)
       
       switch result {

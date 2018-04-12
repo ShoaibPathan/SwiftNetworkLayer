@@ -11,7 +11,7 @@ enum ArtistEndpoint {
   case getEvents(name: String)
 }
 
-extension ArtistEndpoint: APIEndpoint {
+extension ArtistEndpoint: Endpoint {
   
   var baseUrl: String {
     return "https://rest.bandsintown.com"
